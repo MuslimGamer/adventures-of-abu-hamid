@@ -1,4 +1,4 @@
-me = {
+Game = {
     view: {
         // full-screen
         width: window.innerWidth,
@@ -6,11 +6,14 @@ me = {
     },
 
     titleScreen: function () {
-            Game.start();
+        Crafty.init(Game.view.width, Game.view.height);
+        Crafty.background('black');
+
+        Game.start();
     },
 
     start: function () {
-
+        
     }
 };
 
