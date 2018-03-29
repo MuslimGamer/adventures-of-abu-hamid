@@ -11,14 +11,6 @@ me = {
 
     start: function () {
 
-    },
-
-    cleanUp: function() {
-        // copypaste from house of jinn
-        var everything = Crafty("*");
-        for (var i = 0; i < everything.length; i++) {
-            Crafty(everything[i]).die();
-        }
     }
 };
 
