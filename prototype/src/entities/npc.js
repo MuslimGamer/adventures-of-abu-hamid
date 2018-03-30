@@ -1,13 +1,10 @@
 Crafty.c('NPC', {
     init: function () {
-        var self = this;
-        function barter() { self.barter(); }
-
         this.requires('Actor')
             .size(64, 64)
             .color("green")
-            .keyPress(Crafty.keys.SPACE, barter)
-            .click(barter);
+            .keyPress(Crafty.keys.SPACE, this.barter)
+            .click(this.barter);
         
         var barterDistance = config('barterDistance');
         var centerx = this.x + this.width() / 2;

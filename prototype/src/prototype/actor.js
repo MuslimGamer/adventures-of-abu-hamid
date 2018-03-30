@@ -114,7 +114,7 @@ Crafty.c('Actor', {
   keyPress: function(key, callback) {
     this.requires('Keyboard').bind('KeyUp', function(e) {
       if (e.key == key) {
-        callback();
+        callback.call(this);
       }
     });
     return this;
@@ -189,7 +189,7 @@ Crafty.c('Common', {
   // See: mouseDown
   click: function(callback) {
     this.requires('Mouse').bind('Click', function() {
-      callback();
+      callback.call(this);
     });
     return this;
   },
