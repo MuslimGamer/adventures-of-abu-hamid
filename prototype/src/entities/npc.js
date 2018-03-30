@@ -1,10 +1,13 @@
 Crafty.c('NPC', {
     init: function () {
+        var self = this;
+        function barter() { self.barter(); }
+
         this.requires('Actor')
             .size(64, 64)
             .color("green")
-            .keyPress(Crafty.keys.SPACE, this.barter)
-            .click(this.barter);
+            .keyPress(Crafty.keys.SPACE, barter)
+            .click(barter);
         
         var barterDistance = config('barterDistance');
 
@@ -22,7 +25,7 @@ Crafty.c('NPC', {
 
     barter: function() {
         if (this.barterRange.intersect(Crafty('Player'))) {
-            // TODO: create menu
+            Crafty.e('BarterMenu');
         }
     }
 });
