@@ -95,7 +95,7 @@ Crafty.c('Actor', {
   },
   
   followWithCamera: function() {
-    Crafty.viewport.follow(this, (Game.view.width - this.width) / 2, (Game.view.height - this.height) / 2);
+    Crafty.viewport.follow(this);
   },
 
   height: function() {
@@ -265,15 +265,15 @@ Crafty.c('Moveable', {
 
 Crafty.c("Graphics", {
   init: function() {
-    if (Crafty.support.webgl) {
-      this.requires("WebGL");
-      this.graphics = "WebGL";
-    } else if (Crafty.support.canvas) {
-      this.requires("Canvas");
-      this.graphics = "Canvas";
-    } else {
+    // if (Crafty.support.webgl) {
+    //   this.requires("WebGL");
+    //   this.graphics = "WebGL";
+    // } else if (Crafty.support.canvas) {
+    //   this.requires("Canvas");
+    //   this.graphics = "Canvas";
+    // } else {
       this.requires("DOM");
       this.graphics = "DOM";
-    }
+    // }
   }
 });

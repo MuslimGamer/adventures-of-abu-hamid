@@ -10,12 +10,15 @@ Game = {
     titleScreen: function () {
         Crafty.init(Game.view.width, Game.view.height);
         Crafty.background('grey');
-
-        Game.start();
+        
+        loadImages(["assets/background.jpg"], function() {
+            Game.start();
+        });
     },
 
     start: function () {
-        Crafty.e("Player").followWithCamera();
+        Crafty.e("2D, Graphics, Image").image("assets/background.jpg");
+        Crafty.e("Player");
     }
 };
 
