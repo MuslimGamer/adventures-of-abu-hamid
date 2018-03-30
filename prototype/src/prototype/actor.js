@@ -94,6 +94,10 @@ Crafty.c('Actor', {
     return this;
   },
   
+  followWithCamera: function() {
+    Crafty.viewport.follow(this, (Game.view.width - this.width) / 2, (Game.view.height - this.height) / 2);
+  },
+
   height: function() {
       return this.h;
   },

@@ -15,7 +15,7 @@ Game = {
     },
 
     start: function () {
-        Crafty.e("Player");
+        Crafty.e("Player").followWithCamera();
     }
 };
 
