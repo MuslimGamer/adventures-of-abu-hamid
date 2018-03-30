@@ -19,6 +19,15 @@ function config(name) {
   return  queryParam(name) || extern(name, true);
 }
 
+function distanceBetween(e1, e2) {
+    var e1CenterX = e1.x + e1.width() / 2;
+    var e1CenterY = e1.y + e1.height() / 2;
+    var e2CenterX = e2.x + e2.width() / 2;
+    var e2CenterY = e2.y + e2.height() / 2;
+
+    return Math.sqrt(Math.pow(e1CenterX - e2CenterX, 2) + Math.pow(e1CenterY - e2CenterY, 2));
+}
+
 // Inclusive of a, exclusive of b
 // AKA: [a, b)
 // AKA: a <= n < b
