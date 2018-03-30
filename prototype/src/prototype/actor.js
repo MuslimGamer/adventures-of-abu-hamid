@@ -102,6 +102,7 @@ Crafty.c('Actor', {
       return this.h;
   },
 
+  // Won't work with WebGL; so we force Canvas (see bottom of file)
   img: function(filename, repeat) {
     this.requires('Image');
     this.image(filename, repeat);
@@ -263,6 +264,8 @@ Crafty.c('Moveable', {
   }
 });
 
+// WebGL gives a cross-origin error in Chrome when trying to load graphics
+// Hence, we always force DOM.
 Crafty.c("Graphics", {
   init: function() {
     // if (Crafty.support.webgl) {
