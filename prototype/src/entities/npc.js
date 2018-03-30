@@ -10,16 +10,18 @@ Crafty.c('NPC', {
             .click(barter);
         
         var barterDistance = config('barterDistance');
+        var centerx = this.x + this.width() / 2;
+        var centery = this.y + this.height() / 2;
 
         // polygons are made by passing pairs of x,y coordinates as points, preferably in clockwise order.
         var barterRangePolygon = new Crafty.polygon(
-            -barterDistance, -barterDistance, 
-            barterDistance, -barterDistance,
-            barterDistance, barterDistance,
-            -barterDistance, barterDistance
+            -barterDistance + centerx, -barterDistance + centery, 
+            barterDistance + centerx, -barterDistance + centery,
+            barterDistance + centerx, barterDistance + centery,
+            -barterDistance + centerx, barterDistance + centery
         );
 
-        this.barterRange = Crafty.e('2D, Collision');
+        this.barterRange = Crafty.e('2D, Collision, SolidHitBox');
         this.barterRange.collision(barterRangePolygon);
     },
 
