@@ -14,7 +14,7 @@ Crafty.c('BarterMenu', {
         var toReturn = "";
         for (var i = 0; i < this.items.length; i++) {
             var item = this.items[i];
-            toReturn += item.name + ": &nbsp;" + item.price + " coins <br />";
+            toReturn += (i + 1) + '. ' + item.name + ": &nbsp;" + item.price + " coins <br />";
         }
         return toReturn;
     }
