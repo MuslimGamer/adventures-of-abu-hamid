@@ -150,7 +150,7 @@ Crafty.c('Actor', {
 
 Crafty.c('Text2', {
   init: function() {
-    this.requires('Common, Canvas, Text');
+    this.requires('Common, Graphics, Text');
     this.fontSize(20);
   },
 
