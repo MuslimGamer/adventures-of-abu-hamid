@@ -5,5 +5,11 @@ Crafty.c("Player", {
             .color("white")
             .controllable()
             .followWithCamera();
+
+        this.inventory = [];
+
+        this.keyPress(Crafty.keys.I, function() {
+            Crafty.e("ItemListWindow").setItems(this.inventory);
+        })
     }
 });
