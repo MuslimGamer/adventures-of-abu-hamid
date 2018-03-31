@@ -16,8 +16,9 @@ Crafty.c('Actor', {
   },
 
   centerOnScreen: function() {
-    this.x = (Crafty.viewport.width - this.w) / 2;
-    this.y = (Crafty.viewport.height - this.h) / 2;
+    // TODO: take into account the current camera position
+    this.x = -Crafty.viewport.x + ((Crafty.viewport.width - this.w) / 2);
+    this.y = -Crafty.viewport.y + ((Crafty.viewport.height - this.h) / 2);
     return this;
   },
 
@@ -203,6 +204,16 @@ Crafty.c('Common', {
   die: function() {
     this.isDead = true;
     this.destroy();
+    return this;
+  },
+
+  // Stay on screen. Usually used for UI elements.
+  // (x, y) are relative to the top-left of the screen.
+  followForUi(x, y) {
+    this.bind("EnterFrame", function() {
+      this.x = -Crafty.viewport.x + x;
+      this.y = -Crafty.viewport.y + y;
+    });
     return this;
   },
 
