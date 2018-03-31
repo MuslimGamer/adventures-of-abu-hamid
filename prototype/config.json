@@ -1,3 +1,6 @@
 externs = {
-    barterDistance: 120
+    "barterDistance": 120,
+    "numGoodsPerMerchant": 5,
+    "goods": [ "iron", "carrots", "copper", "tomatoes", "chicken", "beef", "oak", "pine",
+        "red books", "blue books", "dead fish", "live fish", "granite", "cement", "gold"]
 }

@@ -15,6 +15,12 @@ Crafty.c('Actor', {
     });
   },
 
+  centerOnScreen: function() {
+    this.x = (Crafty.viewport.width - this.w) / 2;
+    this.y = (Crafty.viewport.height - this.h) / 2;
+    return this;
+  },
+
   // Execute a callback when collides with an entity with the tag in it. This
   // doesn't resolve the collision so that we're no longer overlapping the target.
   // If you want to displace out of the object, use collideWith.
