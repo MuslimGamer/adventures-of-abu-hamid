@@ -9,16 +9,37 @@ Crafty.c('ItemListWindow', {
         })
     },
 
-    setItems: function(items, prices) {
+    setItems: function(items) {
         this.items = items;
-        this.prices = prices;
-        this.fontSize(config("fontSize")).text(this.display());
+        this.display();
+        this.bind("KeyUp", this.buy);
+    },
+
+    buy: function(e) {
+        var key = e.key;
+        // the index number of the item to be bought
+        var num = key - 48;
+        if (this.items.length >= num) {
+            this.buyItem(this.items[num - 1]);
+            this.display();
+        }
+    },
+
+    buyItem: function(item) {
+        var player = Crafty('Player');
+        player.inventory.push(item)
+        this.items = this.items.filter(i => i !== item)
     },
 
     display: function() {
+        this.fontSize(config("fontSize")).text(this.itemsListString());        
+    },
+
+    itemsListString: function() {
         var toReturn = "";
         for (var i = 0; i < this.items.length; i++) {
-            toReturn += this.items[i] + ": &nbsp;" + this.prices[i] + " coins <br />";
+            var item = this.items[i];
+            toReturn += (i + 1) + '. ' + item.name + ": &nbsp;" + item.price + " coins <br />";
         }
         return toReturn;
     }

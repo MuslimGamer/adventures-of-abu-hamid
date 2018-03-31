@@ -9,11 +9,12 @@ Crafty.c('NPC', {
         var numGoods = config("numGoodsPerMerchant");
         // Random but biased towards the first item(s?) heavily. Oh well.
         // https://stackoverflow.com/questions/19269545/how-to-get-n-no-elements-randomly-from-an-array
-        this.items = config("goods").sort(() => .5 - Math.random()).slice(0, numGoods);
-        this.prices = [];
-        for (var i = 0; i < this.items.length; i++) {
+        var itemNames = config("goods").sort(() => .5 - Math.random()).slice(0, numGoods);
+        this.items = [];
+        for (var i = 0; i < itemNames.length; i++) {
             var randomPrice = randomBetween(config("minPrice"), config("maxPrice"));
-            this.prices.push(Math.round(randomPrice));
+            var item = createItem(itemNames[i], Math.round(randomPrice));
+            this.items.push(item);
         }
     },
 
