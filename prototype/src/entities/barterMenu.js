@@ -5,16 +5,16 @@ Crafty.c('BarterMenu', {
             .centerOnScreen();
     },
 
-    setItems: function(items, prices) {
+    setItems: function(items) {
         this.items = items;
-        this.prices = prices;
         this.fontSize(config("fontSize")).text(this.display());
     },
 
     display: function(items) {
         var toReturn = "";
         for (var i = 0; i < this.items.length; i++) {
-            toReturn += this.items[i] + ": &nbsp;" + this.prices[i] + " coins <br />";
+            var item = this.items[i];
+            toReturn += item.name + ": &nbsp;" + item.price + " coins <br />";
         }
         return toReturn;
     }

@@ -5,5 +5,7 @@ Crafty.c("Player", {
             .color("white")
             .controllable()
             .followWithCamera();
+        
+        this.inventory = [];
     }
 });
