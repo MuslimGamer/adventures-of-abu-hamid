@@ -1,5 +1,13 @@
 Crafty.c('ItemListWindow', {
+    // Singleton by force. Like, brute force...
     init: function () {
+        var self = this;
+        Crafty.forEach("ItemListWindow", function(window) {
+            if (window != self) {
+                window.destroy();
+            }
+        });
+        
         this.requires('Actor, Text2').color('white')
             .size(Crafty.viewport.width - 150, Crafty.viewport.height - 150)
             .centerOnScreen().attr({alpha: 0.75});
@@ -15,6 +23,7 @@ Crafty.c('ItemListWindow', {
         this.bind("KeyUp", this.buy);
     },
 
+    // TODO: move to non-inventory subclass
     buy: function(e) {
         var key = e.key;
         // the index number of the item to be bought
@@ -24,7 +33,7 @@ Crafty.c('ItemListWindow', {
             this.display();
         }
     },
-
+    // TODO: move to non-inventory subclass
     buyItem: function(item) {
         var player = Crafty('Player');
         player.inventory.push(item)
