@@ -4,6 +4,7 @@ externs = {
     "minPrice": 100,
     "maxPrice": 500,
     "fontSize": 36,
-    "goods": [ "iron", "carrots", "copper", "tomatoes", "chicken", "beef", "oak", "pine",
-        "red books", "blue books", "dead fish", "live fish", "granite", "cement", "gold"]
+    // Try to make these all 4-6 characters.
+    "goods": [ "iron", "copper", "beef", "oak", "pine", "fish", "cement", "gold",
+    "dates", "miswak", "mushaf", "zamzam", "ajwa", "corn", "kufi"]
 }
