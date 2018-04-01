@@ -3,6 +3,8 @@ externs = {
     "numGoodsPerMerchant": 5,
     "minPrice": 100,
     "maxPrice": 500,
+    "minQuantity": 1,
+    "maxQuantity": 9,
     "fontSize": 36,
     // Try to make these all 4-6 characters.
     "goods": [ "iron", "copper", "beef", "oak", "pine", "fish", "cement", "gold",

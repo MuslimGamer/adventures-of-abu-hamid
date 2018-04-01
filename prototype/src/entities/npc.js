@@ -13,7 +13,8 @@ Crafty.c('NPC', {
         this.items = [];
         for (var i = 0; i < itemNames.length; i++) {
             var randomPrice = randomBetween(config("minPrice"), config("maxPrice"));
-            var item = createItem(itemNames[i], Math.round(randomPrice));
+            var randomQuantity = randomBetween(config("minQuantity"), config("maxQuantity"));
+            var item = new Item(itemNames[i], Math.round(randomPrice), 100);
             this.items.push(item);
         }
     },

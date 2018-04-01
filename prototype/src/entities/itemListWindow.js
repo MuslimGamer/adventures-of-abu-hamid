@@ -25,11 +25,12 @@ Crafty.c('ItemListWindow', {
         this.onClick(function(data) {
             var localY = data.clientY - this.y;
             var selectedItemIndex = Math.floor(localY / config("fontSize") / CLICK_OFFSET_MULTIPLIER);            
-            if (selectedItemIndex < 0 || selectedItemIndex >= this.items.length) {
-                throw "Click index out of range of items; check CLICK_OFFSET_MULTIPLIER."
+            if (selectedItemIndex >= 0 && selectedItemIndex < this.items.length) {
+                var item = this.items[selectedItemIndex];
+                this.buyItem(item);            
+            } else {
+                console.log("Click index out of range of items");
             }
-            var item = this.items[selectedItemIndex];
-            this.buyItem(item);            
         })
     },
 
