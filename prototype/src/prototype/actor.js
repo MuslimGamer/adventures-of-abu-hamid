@@ -200,8 +200,8 @@ Crafty.c('Common', {
   // down (anywhere), hover it over this entity, and then release. #derp
   // See: mouseDown
   onClick: function(callback) {
-    this.requires('Mouse').bind('Click', function() {
-      callback.call(this);
+    this.requires('Mouse').bind('Click', function(data) {
+      callback.call(this, data);
     });
     return this;
   },

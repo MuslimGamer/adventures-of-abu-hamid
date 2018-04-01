@@ -1,3 +1,9 @@
+// Clicking on this window, dividing by font size, is not quite enough; we need to divide
+// buy roughly 1.1x the fontsize in order to get click handling to map to the right items.
+// This could be font-dependent; if you change this, test with the max items that fit in
+// the window (eg. 9), click the first and last items, then the middle ones, and see how it goes.
+const CLICK_OFFSET_MULTIPLIER = 1.1;
+
 Crafty.c('ItemListWindow', {
     // Singleton by force. Like, brute force...
     init: function () {
@@ -14,6 +20,16 @@ Crafty.c('ItemListWindow', {
         
         this.onKeyPress(Crafty.keys.ESC, function() {
             this.destroy();
+        });
+
+        this.onClick(function(data) {
+            var localY = data.clientY - this.y;
+            var selectedItemIndex = Math.floor(localY / config("fontSize") / CLICK_OFFSET_MULTIPLIER);            
+            if (selectedItemIndex < 0 || selectedItemIndex >= this.items.length) {
+                throw "Click index out of range of items; check CLICK_OFFSET_MULTIPLIER."
+            }
+            var item = this.items[selectedItemIndex];
+            this.buyItem(item);            
         })
     },
 
@@ -30,7 +46,6 @@ Crafty.c('ItemListWindow', {
         var num = key - 48;
         if (this.items.length >= num) {
             this.buyItem(this.items[num - 1]);
-            this.display();
         }
     },
     // TODO: move to non-inventory subclass
@@ -38,7 +53,8 @@ Crafty.c('ItemListWindow', {
         var player = Crafty('Player');
         player.inventory.push(item);
         console.log("Bought " + item.name);
-        this.items = this.items.filter(i => i !== item)
+        this.items = this.items.filter(i => i !== item);
+        this.display();        
     },
 
     display: function() {
