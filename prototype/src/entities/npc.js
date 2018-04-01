@@ -3,8 +3,8 @@ Crafty.c('NPC', {
         this.requires('Actor')
             .size(64, 64)
             .color("green")
-            .keyPress(Crafty.keys.SPACE, this.barter)
-            .click(this.barter);
+            .onKeyPress(Crafty.keys.SPACE, this.barter)
+            .onClick(this.barter);
         
         var numGoods = config("numGoodsPerMerchant");
         // Random but biased towards the first item(s?) heavily. Oh well.

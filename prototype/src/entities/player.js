@@ -16,7 +16,7 @@ Crafty.c("Player", {
         
         this.inventoryText.z = 1000;
 
-        this.keyPress(Crafty.keys.I, function() {
+        this.onKeyPress(Crafty.keys.I, function() {
             Crafty.e("ItemListWindow").setItems(this.inventory);
         })
     }

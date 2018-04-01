@@ -116,17 +116,6 @@ Crafty.c('Actor', {
     return this;
   },
 
-  // Fires callback once every time key is pressed down. If you press and hold
-  // down the appropriate key, it still invokes the callback only once.
-  keyPress: function(key, callback) {
-    this.requires('Keyboard').bind('KeyUp', function(e) {
-      if (e.key == key) {
-        callback.call(this);
-      }
-    });
-    return this;
-  },
-
   // Resize
   size: function(width, height) {
     this.attr({ w: width, h: height });
@@ -191,16 +180,6 @@ Crafty.c('Common', {
     }
   },
 
-  // Execute a callback when clicked on. Technically, when you press the mouse
-  // down (anywhere), hover it over this entity, and then release. #derp
-  // See: mouseDown
-  click: function(callback) {
-    this.requires('Mouse').bind('Click', function() {
-      callback.call(this);
-    });
-    return this;
-  },
-
   die: function() {
     this.isDead = true;
     this.destroy();
@@ -217,28 +196,49 @@ Crafty.c('Common', {
     return this;
   },
 
-  mouseDown: function(callback) {
+  // Execute a callback when clicked on. Technically, when you press the mouse
+  // down (anywhere), hover it over this entity, and then release. #derp
+  // See: mouseDown
+  onClick: function(callback) {
+    this.requires('Mouse').bind('Click', function() {
+      callback.call(this);
+    });
+    return this;
+  },
+
+  // Fires callback once every time key is pressed down. If you press and hold
+  // down the appropriate key, it still invokes the callback only once.
+  onKeyPress: function(key, callback) {
+    this.requires('Keyboard').bind('KeyUp', function(e) {
+      if (e.key == key) {
+        callback.call(this);
+      }
+    });
+    return this;
+  },
+
+  onMouseDown: function(callback) {
     this.requires('Mouse').bind('MouseDown', function(e) {
       callback(e);
     });
     return this;
   },
 
-  mouseUp: function(callback) {
+  onMouseUp: function(callback) {
     this.requires('Mouse').bind('MouseUp', function(e) {
       callback(e);
     });
     return this;
   },
 
-  mouseOut: function(callback) {
+  onMouseOut: function(callback) {
     this.requires('Mouse').bind('MouseOut', function(e) {
       callback(e);
     });
     return this;
   },
 
-  mouseOver: function(callback) {
+  onMouseOver: function(callback) {
     this.requires('Mouse').bind('MouseOver', function(e) {
       callback(e);
     });

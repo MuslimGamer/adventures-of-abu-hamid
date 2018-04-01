@@ -12,7 +12,7 @@ Crafty.c('ItemListWindow', {
             .size(Crafty.viewport.width - 150, Crafty.viewport.height - 150)
             .centerOnScreen().attr({alpha: 0.75});
         
-        this.keyPress(Crafty.keys.ESC, function() {
+        this.onKeyPress(Crafty.keys.ESC, function() {
             this.destroy();
         })
     },
@@ -36,7 +36,8 @@ Crafty.c('ItemListWindow', {
     // TODO: move to non-inventory subclass
     buyItem: function(item) {
         var player = Crafty('Player');
-        player.inventory.push(item)
+        player.inventory.push(item);
+        console.log("Bought " + item.name);
         this.items = this.items.filter(i => i !== item)
     },
 
