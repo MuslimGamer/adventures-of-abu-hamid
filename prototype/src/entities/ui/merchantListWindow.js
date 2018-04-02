@@ -17,11 +17,12 @@ Crafty.c('MerchantListWindow', {
         this.requires('InventoryListWindow');
 
         this.onClick(function(data) {
-            var localY = data.clientY - this.y;
+            var localY = data.clientY - Crafty.viewport.y - this.y;
             var selectedItemIndex = Math.floor(localY / config("fontSize") / CLICK_OFFSET_MULTIPLIER);            
             this.buyItem(selectedItemIndex);            
-           
-        })
+        });
+
+        Crafty.e("BuySellToggle");
     },
 
     buy: function(e) {
@@ -57,7 +58,7 @@ Crafty.c('MerchantListWindow', {
                 }
 
                 this.display();
-                Crafty("DinarIndicator").update();                
+                Crafty("DinarIndicator").updateDisplay();                
             } else {
                 console.log("Can't afford that, mate.");
             }

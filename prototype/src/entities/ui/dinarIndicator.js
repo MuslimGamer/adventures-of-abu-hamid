@@ -3,10 +3,10 @@ Crafty.c("DinarIndicator", {
         this.requires("Text2").fontSize(config("fontSize")).textColor("white")
             .followForUi(PADDING, PADDING);
         this.z = 1000;
-        this.update();
+        this.updateDisplay();
     },
 
-    update: function() {
+    updateDisplay: function() {
         var player = Crafty("Player");
         this.text(player.dinars + " dinars")
     }
