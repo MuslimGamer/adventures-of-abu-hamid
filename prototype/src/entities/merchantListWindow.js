@@ -43,6 +43,7 @@ Crafty.c('MerchantListWindow', {
         // If we already own it, increment our quantity by 1
         var existing = player.inventory.filter(i => i.name == item.name);
         if (existing.length == 0) {
+            copy.quantity = 1;
             player.inventory.push(copy);
         } else {
             copy.quantity = existing.quantity + 1;
