@@ -19,12 +19,8 @@ Crafty.c('MerchantListWindow', {
         this.onClick(function(data) {
             var localY = data.clientY - this.y;
             var selectedItemIndex = Math.floor(localY / config("fontSize") / CLICK_OFFSET_MULTIPLIER);            
-            if (selectedItemIndex >= 0 && selectedItemIndex < this.items.length) {
-                var item = this.items[selectedItemIndex];
-                this.buyItem(item);            
-            } else {
-                console.log("Click index out of range of items");
-            }
+            this.buyItem(selectedItemIndex);            
+           
         })
     },
 
@@ -32,29 +28,32 @@ Crafty.c('MerchantListWindow', {
         var key = e.key;
         // the index number of the item to be bought
         var num = key - 48;
-        if (this.items.length >= num) {
-            this.buyItem(this.items[num - 1]);
-        }
+        this.buyItem(num - 1);
     },
 
-    buyItem: function(item) {
-        var player = Crafty('Player');
-        var copy = Object.assign({}, item);
-        // If we already own it, increment our quantity by 1
-        var existing = player.inventory.filter(i => i.name == item.name);
-        if (existing.length == 0) {
-            copy.quantity = 1;
-            player.inventory.push(copy);
+    buyItem: function(itemIndex) {
+        if (itemIndex >= 0 && itemIndex < this.items.length) {
+            var item = this.items[itemIndex];
+            var player = Crafty('Player');
+            var copy = Object.assign({}, item);
+            // If we already own it, increment our quantity by 1
+            var existing = player.inventory.filter(i => i.name == item.name);
+            if (existing.length == 0) {
+                copy.quantity = 1;
+                player.inventory.push(copy);
+            } else {
+                copy.quantity = existing.quantity + 1;
+            }
+            console.log("Bought one of " + item.name);
+            
+            // Decrement quantity by one from seller. If zero, remove.
+            item.quantity -= 1;
+            if (item.quantity == 0) {
+                this.items = this.items.filter(i => i !== item);
+            }
+            this.display(); 
         } else {
-            copy.quantity = existing.quantity + 1;
-        }
-        console.log("Bought one of " + item.name);
-        
-        // Decrement quantity by one from seller. If zero, remove.
-        item.quantity -= 1;
-        if (item.quantity == 0) {
-            this.items = this.items.filter(i => i !== item);
-        }
-        this.display();        
+            console.log("Index out of range of items");
+        }       
     }
 });
