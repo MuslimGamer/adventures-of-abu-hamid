@@ -1,4 +1,4 @@
-Crafty.c('NPC', {
+Crafty.c('Merchant', {
     init: function () {
         this.requires('Actor')
             .size(64, 64)
