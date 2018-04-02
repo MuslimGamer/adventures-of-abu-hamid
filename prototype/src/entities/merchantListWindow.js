@@ -31,27 +31,36 @@ Crafty.c('MerchantListWindow', {
         this.buyItem(num - 1);
     },
 
-    buyItem: function(itemIndex) {
+    buyItem: function(itemIndex) {        
         if (itemIndex >= 0 && itemIndex < this.items.length) {
             var item = this.items[itemIndex];
             var player = Crafty('Player');
-            var copy = Object.assign({}, item);
-            // If we already own it, increment our quantity by 1
-            var existing = player.inventory.filter(i => i.name == item.name);
-            if (existing.length == 0) {
-                copy.quantity = 1;
-                player.inventory.push(copy);
+
+            if (player.dinars >= item.price) {
+
+                var copy = Object.assign({}, item);
+                // If we already own it, increment our quantity by 1
+                var existing = player.inventory.filter(i => i.name == item.name);
+                if (existing.length == 0) {
+                    copy.quantity = 1;
+                    player.inventory.push(copy);
+                } else {
+                    existing[0].quantity += 1;
+                }
+                player.dinars -= item.price;
+                console.log("Bought one of " + item.name);
+                
+                // Decrement quantity by one from seller. If zero, remove.
+                item.quantity -= 1;
+                if (item.quantity == 0) {
+                    this.items = this.items.filter(i => i !== item);
+                }
+
+                this.display();
+                Crafty("DinarIndicator").update();                
             } else {
-                copy.quantity = existing.quantity + 1;
+                console.log("Can't afford that, mate.");
             }
-            console.log("Bought one of " + item.name);
-            
-            // Decrement quantity by one from seller. If zero, remove.
-            item.quantity -= 1;
-            if (item.quantity == 0) {
-                this.items = this.items.filter(i => i !== item);
-            }
-            this.display(); 
         } else {
             console.log("Index out of range of items");
         }       

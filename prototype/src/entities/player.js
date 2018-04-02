@@ -11,11 +11,6 @@ Crafty.c("Player", {
         this.inventory = [];
         this.dinars = config("startingDinars");
 
-        this.inventoryText = Crafty.e("Text2").fontSize(config("fontSize")).textColor("white")
-            .followForUi(PADDING, PADDING).text(this.dinars + " dinars");
-        
-        this.inventoryText.z = 1000;
-
         this.onKeyPress(Crafty.keys.I, function() {
             Crafty.e("InventoryListWindow").setItems(this.inventory);
         })

@@ -19,6 +19,7 @@ Game = {
     start: function () {
         Crafty.e("2D, Graphics, Image").image("assets/background.jpg");
         Crafty.e("Player");
+        Crafty.e("DinarIndicator");
         Crafty.e("Merchant");
     }
 };
