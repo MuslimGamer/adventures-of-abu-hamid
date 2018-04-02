@@ -22,7 +22,11 @@ Crafty.c('MerchantListWindow', {
             this.buyItem(selectedItemIndex);            
         });
 
-        Crafty.e("BuySellToggle");
+        this.buySellToggle = Crafty.e("BuySellToggle");
+    },
+
+    remove: function() {
+        this.buySellToggle.die();
     },
 
     buy: function(e) {
