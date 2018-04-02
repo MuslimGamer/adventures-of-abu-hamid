@@ -40,7 +40,7 @@ Crafty.c('ItemListWindow', {
         this.bind("KeyUp", this.buy);
     },
 
-    // TODO: move to non-inventory subclass
+    // TODO: extract to non-inventory subclass
     buy: function(e) {
         var key = e.key;
         // the index number of the item to be bought
@@ -49,12 +49,24 @@ Crafty.c('ItemListWindow', {
             this.buyItem(this.items[num - 1]);
         }
     },
-    // TODO: move to non-inventory subclass
+    // TODO: extract to non-inventory subclass
     buyItem: function(item) {
         var player = Crafty('Player');
-        player.inventory.push(item);
-        console.log("Bought " + item.name);
-        this.items = this.items.filter(i => i !== item);
+        var copy = Object.assign({}, item);
+        // If we already own it, increment our quantity by 1
+        var existing = player.inventory.filter(i => i.name == item.name);
+        if (existing.length == 0) {
+            player.inventory.push(copy);
+        } else {
+            copy.quantity = existing.quantity + 1;
+        }
+        console.log("Bought one of " + item.name);
+        
+        // Decrement quantity by one from seller. If zero, remove.
+        item.quantity -= 1;
+        if (item.quantity == 0) {
+            this.items = this.items.filter(i => i !== item);
+        }
         this.display();        
     },
 
