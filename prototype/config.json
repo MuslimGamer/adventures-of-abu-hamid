@@ -5,8 +5,10 @@ externs = {
     "maxPrice": 500,
     "minQuantity": 1,
     "maxQuantity": 9,
-    "fontSize": 36,
     // Try to make these all 4-6 characters.
     "goods": [ "iron", "copper", "beef", "oak", "pine", "fish", "cement", "gold",
-    "dates", "miswak", "mushaf", "zamzam", "ajwa", "corn", "kufi"]
+        "dates", "miswak", "mushaf", "zamzam", "ajwa", "corn", "kufi"],
+
+    "fontSize": 36,
+    "startingDinars": 1500
 }

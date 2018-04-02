@@ -9,10 +9,10 @@ Crafty.c("Player", {
             .followWithCamera();
 
         this.inventory = [];
-        this.dinars = 100;
+        this.dinars = config("startingDinars");
 
-        this.inventoryText = Crafty.e("Text2").fontSize(config("fontSize") / 2)
-            .followForUi(PADDING, PADDING).text(this.dinars + ".dinars");
+        this.inventoryText = Crafty.e("Text2").fontSize(config("fontSize")).textColor("white")
+            .followForUi(PADDING, PADDING).text(this.dinars + " dinars");
         
         this.inventoryText.z = 1000;
 
