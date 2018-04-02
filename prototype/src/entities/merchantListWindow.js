@@ -4,23 +4,17 @@
 // the window (eg. 9), click the first and last items, then the middle ones, and see how it goes.
 const CLICK_OFFSET_MULTIPLIER = 1.1;
 
-Crafty.c('ItemListWindow', {
+Crafty.c('MerchantListWindow', {
     // Singleton by force. Like, brute force...
     init: function () {
         var self = this;
-        Crafty.forEach("ItemListWindow", function(window) {
+        Crafty.forEach("MerchantListWindow", function(window) {
             if (window != self) {
                 window.destroy();
             }
         });
         
-        this.requires('Actor, Text2').color('white')
-            .size(Crafty.viewport.width - 150, Crafty.viewport.height - 150)
-            .centerOnScreen().attr({alpha: 0.75});
-        
-        this.onKeyPress(Crafty.keys.ESC, function() {
-            this.destroy();
-        });
+        this.requires('InventoryListWindow');
 
         this.onClick(function(data) {
             var localY = data.clientY - this.y;
@@ -34,13 +28,6 @@ Crafty.c('ItemListWindow', {
         })
     },
 
-    setItems: function(items) {
-        this.items = items;
-        this.display();
-        this.bind("KeyUp", this.buy);
-    },
-
-    // TODO: extract to non-inventory subclass
     buy: function(e) {
         var key = e.key;
         // the index number of the item to be bought
@@ -49,7 +36,7 @@ Crafty.c('ItemListWindow', {
             this.buyItem(this.items[num - 1]);
         }
     },
-    // TODO: extract to non-inventory subclass
+
     buyItem: function(item) {
         var player = Crafty('Player');
         var copy = Object.assign({}, item);
@@ -68,19 +55,5 @@ Crafty.c('ItemListWindow', {
             this.items = this.items.filter(i => i !== item);
         }
         this.display();        
-    },
-
-    display: function() {
-        this.fontSize(config("fontSize")).text(this.itemsListString());        
-    },
-
-    itemsListString: function() {
-        var toReturn = "";
-        for (var i = 0; i < this.items.length; i++) {
-            var item = this.items[i];
-            toReturn = "{0}{1}) {2} x{3} &nbsp;&nbsp;({4} dinars each)<br />"
-                .format(toReturn, (i + 1), item.name, item.quantity, item.price);
-        }
-        return toReturn;
     }
 });

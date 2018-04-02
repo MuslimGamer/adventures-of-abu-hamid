@@ -17,7 +17,7 @@ Crafty.c("Player", {
         this.inventoryText.z = 1000;
 
         this.onKeyPress(Crafty.keys.I, function() {
-            Crafty.e("ItemListWindow").setItems(this.inventory);
+            Crafty.e("InventoryListWindow").setItems(this.inventory);
         })
     }
 });

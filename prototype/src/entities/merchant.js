@@ -24,7 +24,7 @@ Crafty.c('Merchant', {
         var barterDistance = config('barterDistance');
         if (distanceBetween(this, player) <= barterDistance)
         {
-            Crafty.e('ItemListWindow').setItems(this.items);
+            Crafty.e('MerchantListWindow').setItems(this.items);
         }
     }
 });
