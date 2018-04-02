@@ -66,7 +66,8 @@ Crafty.c('ItemListWindow', {
         var toReturn = "";
         for (var i = 0; i < this.items.length; i++) {
             var item = this.items[i];
-            toReturn += (i + 1) + '. ' + item.name + ": &nbsp;" + item.price + " coins <br />";
+            toReturn = "{0}{1}) {2} x{3} &nbsp;&nbsp;({4} dinars each)<br />"
+                .format(toReturn, (i + 1), item.name, item.quantity, item.price);
         }
         return toReturn;
     }
