@@ -25,10 +25,6 @@ Crafty.c('MerchantListWindow', {
         this.buySellToggle = Crafty.e("BuySellToggle");
     },
 
-    remove: function() {
-        this.buySellToggle.die();
-    },
-
     buy: function(e) {
         var key = e.key;
         // the index number of the item to be bought
@@ -36,8 +32,8 @@ Crafty.c('MerchantListWindow', {
         this.buyItem(num - 1);
     },
 
-    buyItem: function(itemIndex) {        
-        if (itemIndex >= 0 && itemIndex < this.items.length) {
+    buyItem: function(itemIndex) { 
+        if (this.items != null && itemIndex >= 0 && itemIndex < this.items.length) {
             var item = this.items[itemIndex];
             var player = Crafty('Player');
 
@@ -61,7 +57,7 @@ Crafty.c('MerchantListWindow', {
                     this.items = this.items.filter(i => i !== item);
                 }
 
-                this.display();
+                this.updateDisplay();
                 Crafty("DinarIndicator").updateDisplay();                
             } else {
                 console.log("Can't afford that, mate.");
@@ -69,5 +65,22 @@ Crafty.c('MerchantListWindow', {
         } else {
             console.log("Index out of range of items");
         }       
+    },
+
+    remove: function() {
+        this.buySellToggle.die();
+    },
+
+    setBuyingAndSellingItems: function(merchantItems, playerItems) {
+        this.merchantItems = merchantItems;
+        this.playerInventory = playerItems;
+        this.toggleBuyingSelling();
+        this.updateDisplay();
+        this.bind("KeyUp", this.buy);
+    },
+
+    toggleBuyingSelling: function() {
+        this.items = this.buySellToggle.isPlayerBuying ? this.merchantItems : this.playerInventory;        
+        this.updateDisplay();
     }
 });

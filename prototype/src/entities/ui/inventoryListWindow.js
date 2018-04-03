@@ -21,11 +21,12 @@ Crafty.c('InventoryListWindow', {
 
     setItems: function(items) {
         this.items = items;
-        this.display();
+        this.updateDisplay();
         this.bind("KeyUp", this.buy);
+        return this;        
     },
 
-    display: function() {
+    updateDisplay: function() {
         var displayText = "";
         for (var i = 0; i < this.items.length; i++) {
             var item = this.items[i];
