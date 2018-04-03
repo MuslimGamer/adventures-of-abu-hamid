@@ -19,17 +19,18 @@ Crafty.c('MerchantListWindow', {
         this.onClick(function(data) {
             var localY = data.clientY - Crafty.viewport.y - this.y;
             var selectedItemIndex = Math.floor(localY / config("fontSize") / CLICK_OFFSET_MULTIPLIER);            
-            this.buyItem(selectedItemIndex);            
+            this.tradeItem(selectedItemIndex);            
         });
 
         this.buySellToggle = Crafty.e("BuySellToggle");
+        this.tradeItem = this.buySellToggle.isPlayerBuying ? this.buyItem : this.sellItem;
     },
 
-    buy: function(e) {
+    trade: function(e) {
         var key = e.key;
         // the index number of the item to be bought
         var num = key - 48;
-        this.buyItem(num - 1);
+        this.tradeItem(num - 1);
     },
 
     buyItem: function(itemIndex) { 
@@ -67,6 +68,12 @@ Crafty.c('MerchantListWindow', {
         }       
     },
 
+    sellItem: function(itemIndex) {
+        console.log('selling ' + itemIndex);
+    },
+
+    tradeItem: function(itemIndex) {},
+
     remove: function() {
         this.buySellToggle.die();
     },
@@ -76,11 +83,12 @@ Crafty.c('MerchantListWindow', {
         this.playerInventory = playerItems;
         this.toggleBuyingSelling();
         this.updateDisplay();
-        this.bind("KeyUp", this.buy);
+        this.bind("KeyUp", this.trade);
     },
 
     toggleBuyingSelling: function() {
-        this.items = this.buySellToggle.isPlayerBuying ? this.merchantItems : this.playerInventory;        
+        this.items = this.buySellToggle.isPlayerBuying ? this.merchantItems : this.playerInventory;
+        this.tradeItem = this.buySellToggle.isPlayerBuying ? this.buyItem : this.sellItem;
         this.updateDisplay();
     }
 });
