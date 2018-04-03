@@ -17,6 +17,13 @@ Crafty.c('Merchant', {
             var item = new Item(itemNames[i], Math.round(randomPrice), randomQuantity);
             this.items.push(item);
         }
+
+        if (config('features').merchantsHaveFavouriteItems) {
+            var itemName = itemNames[Math.floor(Math.random()*itemNames.length)];
+            var price = randomBetween(config("minPrice"), config("maxPrice")) + config("maxPrice");
+            this.favouriteItem = {name: itemName, price: price};
+            console.log(itemName, price);
+        }
     },
 
     barter: function() {
@@ -24,7 +31,12 @@ Crafty.c('Merchant', {
         var barterDistance = config('barterDistance');
         if (distanceBetween(this, player) <= barterDistance)
         {
-            Crafty.e('MerchantListWindow').setBuyingAndSellingItems(this.items, player.inventory);
+            var merchantWindow = Crafty.e('MerchantListWindow');
+            if (config('features').merchantsHaveFavouriteItems) {
+                merchantWindow.setFavouriteItem(this.favouriteItem);
+            }
+            
+            merchantWindow.setBuyingAndSellingItems(this.items, player.inventory);
         }
     }
 });

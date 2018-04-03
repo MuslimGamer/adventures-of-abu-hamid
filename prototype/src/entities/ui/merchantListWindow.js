@@ -112,6 +112,11 @@ Crafty.c('MerchantListWindow', {
         this.bind("KeyUp", this.trade);
     },
 
+    setFavouriteItem: function(favouriteItem) {
+        this.favouriteItem = favouriteItem;
+        return this;
+    },
+
     toggleBuyingSelling: function() {
         this.items = this.buySellToggle.isPlayerBuying ? this.merchantItems : this.playerInventory;
         this.tradeItem = this.buySellToggle.isPlayerBuying ? this.buyItem : this.sellItem;

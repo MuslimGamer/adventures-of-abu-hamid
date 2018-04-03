@@ -29,8 +29,14 @@ Crafty.c('InventoryListWindow', {
         var displayText = "";
         for (var i = 0; i < this.items.length; i++) {
             var item = this.items[i];
-            displayText = "{0}{1}) {2} x{3} &nbsp;&nbsp;({4} dinars each)<br />"
-                .format(displayText, (i + 1), item.name, item.quantity, item.price);
+            if (config('features').merchantsHaveFavouriteItems && typeof this.favouriteItem != 'undefined' && this.favouriteItem.name == item.name) {
+                displayText = "{0}{1}) {2} x{3} &nbsp;&nbsp;({4} dinars each)*<br />"
+                    .format(displayText, (i + 1), item.name, item.quantity, this.favouriteItem.price);
+            } else {
+                displayText = "{0}{1}) {2} x{3} &nbsp;&nbsp;({4} dinars each)<br />"
+                    .format(displayText, (i + 1), item.name, item.quantity, item.price);
+            }
+            
         }
         
         this.text(displayText);
