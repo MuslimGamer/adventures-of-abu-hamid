@@ -10,5 +10,10 @@ externs = {
         "dates", "miswak", "mushaf", "zamzam", "ajwa", "corn", "kufi"],
 
     "fontSize": 36,
-    "startingDinars": 1500
+    "startingDinars": 1500,
+
+    "merchant": {
+        "baseDinars": 1000,
+        "dinarFluctation": 500
+    }
 }

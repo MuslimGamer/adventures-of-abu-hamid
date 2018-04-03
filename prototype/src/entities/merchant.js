@@ -6,6 +6,11 @@ Crafty.c('Merchant', {
             .onKeyPress(Crafty.keys.SPACE, this.barter)
             .onClick(this.barter);
         
+        var dinarFluctation = Math.random() * config('merchant').dinarFluctation;
+        dinarFluctation = Math.random() > 0.5 ? dinarFluctation : -dinarFluctation;
+
+        this.dinars = config('merchant').baseDinars + dinarFluctation;
+        
         var numGoods = config("numGoodsPerMerchant");
         // Random but biased towards the first item(s?) heavily. Oh well.
         // https://stackoverflow.com/questions/19269545/how-to-get-n-no-elements-randomly-from-an-array
