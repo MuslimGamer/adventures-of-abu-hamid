@@ -22,7 +22,6 @@ Crafty.c('InventoryListWindow', {
     setItems: function(items) {
         this.items = items;
         this.updateDisplay();
-        this.bind("KeyUp", this.buy);
         return this;        
     },
 
