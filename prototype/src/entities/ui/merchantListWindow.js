@@ -69,7 +69,33 @@ Crafty.c('MerchantListWindow', {
     },
 
     sellItem: function(itemIndex) {
-        console.log('selling ' + itemIndex);
+        var player = Crafty('Player');
+        if (player.inventory != null && itemIndex >= 0 && itemIndex < player.inventory.length) {
+            var item = player.inventory[itemIndex];
+            var copy = Object.assign({}, item);
+
+            // If we already own it, increment our quantity by 1
+            var existing = this.merchantItems.filter(i => i.name == item.name);
+            if (existing.length == 0) {
+                copy.quantity = 1;
+                this.merchantItems.push(copy);
+            } else {
+                existing[0].quantity += 1;
+            }
+            player.dinars += item.price;
+            console.log("Sold one of " + item.name);
+            
+            // Decrement quantity by one from seller. If zero, remove.
+            item.quantity -= 1;
+            if (item.quantity <= 0) {
+                player.inventory = player.inventory.filter(i => i !== item);
+            }
+
+            this.updateDisplay();
+            Crafty("DinarIndicator").updateDisplay();
+        } else {
+            console.log("Index out of range of items");
+        }
     },
 
     tradeItem: function(itemIndex) {},
