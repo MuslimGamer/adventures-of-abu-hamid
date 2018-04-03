@@ -68,8 +68,8 @@ Crafty.c('Actor', {
       for (var i = 0; i < hitData.length; i++) {
         var data = hitData[i];
         // displace backward so we're no longer overlapping
-        var dx = -data.normal.x * data.overlap;
-        var dy = -data.normal.y * data.overlap;
+        var dx = -data.nx * data.overlap;
+        var dy = -data.ny * data.overlap;
 
         this.x += dx;
         this.y += dy;

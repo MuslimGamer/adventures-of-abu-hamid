@@ -10,6 +10,7 @@ Crafty.c("Player", {
 
         this.inventory = [];
         this.dinars = config("startingDinars");
+        this.collideWith("Wall");
 
         this.onKeyPress(Crafty.keys.I, function() {
             Crafty.e("InventoryListWindow").setItems(this.inventory);
