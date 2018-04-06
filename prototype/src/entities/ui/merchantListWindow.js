@@ -24,6 +24,8 @@ Crafty.c('MerchantListWindow', {
 
         this.buySellToggle = Crafty.e("BuySellToggle");
         this.tradeItem = this.buySellToggle.isPlayerBuying ? this.buyItem : this.sellItem;
+
+        this.haggleButton = Crafty.e('HaggleButton');
     },
 
     trade: function(e) {
