@@ -14,33 +14,14 @@ Game = {
         height: 1080
     },
 
-    titleScreen: function () {
+    start: function () {
         Crafty.init(Game.view.width, Game.view.height);
         Crafty.background('grey');
         
         loadImages(["assets/background.jpg"], function() {
-            Game.start();
+            Crafty.enterScene("topDownTraversalScene");
         });
-    },
-
-    start: function () {
-        var bg = Crafty.e("2D, Graphics, Image").image("assets/background.jpg");
-        bg.z = -100;
-        Crafty.e("Merchant").move(200, 200);
-
-        this.addBoundingWalls();
-        Crafty.e("Player").move(100, 100);      
-        Crafty.e("DinarIndicator");
-    },
-
-    addBoundingWalls: function() {
-        Crafty.e("Wall").size(Game.world.width, WALL_THICKNESS); // top
-        Crafty.e("Wall").size(Game.world.width, WALL_THICKNESS)
-            .move(0, Game.world.height - WALL_THICKNESS); // bottom
-        Crafty.e("Wall").size(WALL_THICKNESS, Game.world.height); // left
-        Crafty.e("Wall").size(WALL_THICKNESS, Game.world.height)
-            .move(Game.world.width - WALL_THICKNESS, 0); // right
     }
 };
 
-window.addEventListener('load', Game.titleScreen);
+window.addEventListener('load', Game.start);
