@@ -16,7 +16,7 @@ Game = {
         Crafty.init(Game.view.width, Game.view.height);
         Crafty.background('grey');
         
-        loadImages(["assets/background.jpg"], function() {
+        loadImages(["assets/background.jpg", "assets/stars.jpg"], function() {
             Crafty.enterScene("topDownTraversalScene");
             // Crafty.enterScene("hyperspaceScene");
         });
