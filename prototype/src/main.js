@@ -1,5 +1,3 @@
-WALL_THICKNESS = 8;
-
 Game = {
     view: {
         // NOT full-screen
@@ -20,6 +18,7 @@ Game = {
         
         loadImages(["assets/background.jpg"], function() {
             Crafty.enterScene("topDownTraversalScene");
+            // Crafty.enterScene("hyperspaceScene");
         });
     }
 };
