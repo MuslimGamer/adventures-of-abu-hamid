@@ -1,6 +1,7 @@
 WALL_THICKNESS = 8;
 
-Crafty.defineScene("topDownTraversalScene", function() {
+Crafty.defineScene("topDownTraversalScene", function(planetNumber) {
+    console.log("Entering planet " + planetNumber);
     var bg = Crafty.e("2D, Graphics, Image").image("assets/background.jpg");
     bg.z = -100;
     Crafty.e("Merchant").move(200, 200);

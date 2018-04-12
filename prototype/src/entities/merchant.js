@@ -22,7 +22,6 @@ Crafty.c('Merchant', {
             var itemName = itemNames[Math.floor(Math.random()*itemNames.length)];
             var price = randomBetween(config("minPrice"), config("maxPrice")) + config("maxPrice");
             this.favouriteItem = {name: itemName, price: price};
-            console.log(itemName, price);
         }
     },
 
