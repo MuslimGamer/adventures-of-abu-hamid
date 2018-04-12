@@ -17,8 +17,8 @@ Game = {
         Crafty.background('grey');
         
         loadImages(["assets/background.jpg", "assets/stars.jpg"], function() {
-            Crafty.enterScene("topDownTraversalScene");
-            // Crafty.enterScene("hyperspaceScene");
+            // Crafty.enterScene("topDownTraversalScene");
+            Crafty.enterScene("hyperspaceScene");
         });
     }
 };

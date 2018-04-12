@@ -14,5 +14,7 @@ externs = {
 
     "features": {
         "merchantsHaveFavouriteItems": true
-    }
+    },
+
+    "universeSizeInPlanets": 5
 }
