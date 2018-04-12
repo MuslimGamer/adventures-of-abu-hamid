@@ -15,4 +15,11 @@ Crafty.defineScene("topDownTraversalScene", function(planetNumber) {
 
     Crafty.e("Player").move(100, 100);      
     Crafty.e("DinarIndicator");
+
+    var exit = Crafty.e("Actor").size(32, 64).color("#acf").collide("Player", function() {
+        Crafty.enterScene("hyperspaceScene");
+    });
+
+    // Position at the top
+    exit.move((Game.view.width - exit.width()) / 2, exit.height());
 });
