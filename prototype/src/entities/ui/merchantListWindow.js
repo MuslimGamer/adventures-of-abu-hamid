@@ -104,6 +104,7 @@ Crafty.c('MerchantListWindow', {
 
     remove: function() {
         this.buySellToggle.die();
+        this.haggleButton.die();
     },
 
     setBuyingAndSellingItems: function(merchantItems, playerItems) {
