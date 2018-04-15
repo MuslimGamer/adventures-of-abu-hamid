@@ -5,7 +5,7 @@ Crafty.c("Player", {
         this.requires("Actor")
             .size(64, 64)
             .color("white")
-            .controllable()
+            .controllable(config('playerSpeed'))
             .followWithCamera();
 
         this.inventory = [];

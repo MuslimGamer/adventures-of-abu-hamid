@@ -12,6 +12,8 @@ externs = {
     "fontSize": 36,
     "startingDinars": 1500,
 
+    "playerSpeed": 300,
+
     "features": {
         "merchantsHaveFavouriteItems": true
     },
