@@ -11,11 +11,10 @@ Crafty.c("Player", {
             .controllable(config('playerSpeed'))
             .followWithCamera();
 
-        this.inventory = inventory;
         this.collideWith("Wall").collideWith("Merchant");
 
         this.onKeyPress(Crafty.keys.I, function() {
-            Crafty.e("InventoryListWindow").setItems(this.inventory);
+            Crafty.e("InventoryListWindow").setItems(inventory);
         })
     }
 });

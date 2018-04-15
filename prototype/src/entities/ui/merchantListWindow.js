@@ -46,10 +46,10 @@ Crafty.c('MerchantListWindow', {
 
                 var copy = Object.assign({}, item);
                 // If we already own it, increment our quantity by 1
-                var existing = player.inventory.filter(i => i.name == item.name);
+                var existing = inventory.filter(i => i.name == item.name);
                 if (existing.length == 0) {
                     copy.quantity = 1;
-                    player.inventory.push(copy);
+                    inventory.push(copy);
                 } else {
                     existing[0].quantity += 1;
                 }
@@ -74,8 +74,8 @@ Crafty.c('MerchantListWindow', {
 
     sellItem: function(itemIndex) {
         var player = Crafty('Player');
-        if (player.inventory != null && itemIndex >= 0 && itemIndex < player.inventory.length) {
-            var item = player.inventory[itemIndex];
+        if (inventory != null && itemIndex >= 0 && itemIndex < inventory.length) {
+            var item = inventory[itemIndex];
             var copy = Object.assign({}, item);
 
             // If we already own it, increment our quantity by 1
@@ -92,8 +92,8 @@ Crafty.c('MerchantListWindow', {
             // Decrement quantity by one from seller. If zero, remove.
             item.quantity -= 1;
             if (item.quantity <= 0) {
-                player.inventory = player.inventory.filter(i => i !== item);
-                this.items = player.inventory;
+                inventory = inventory.filter(i => i !== item);
+                this.items = inventory;
             }
 
             this.updateDisplay();

@@ -41,7 +41,7 @@ Crafty.c('Merchant', {
                 merchantWindow.setFavouriteItem(this.favouriteItem);
             }
             
-            merchantWindow.setBuyingAndSellingItems(this.items, player.inventory, this.priceMap);
+            merchantWindow.setBuyingAndSellingItems(this.items, inventory, this.priceMap);
         }
     }
 });
