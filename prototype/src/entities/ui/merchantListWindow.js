@@ -91,6 +91,7 @@ Crafty.c('MerchantListWindow', {
             item.quantity -= 1;
             if (item.quantity <= 0) {
                 player.inventory = player.inventory.filter(i => i !== item);
+                this.items = player.inventory;
             }
 
             this.updateDisplay();
