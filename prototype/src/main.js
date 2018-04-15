@@ -15,6 +15,7 @@ Game = {
     start: function () {
         Crafty.init(Game.view.width, Game.view.height);
         Crafty.background('grey');
+        dinars = [config("startingDinars")];
         
         loadImages(["assets/background.jpg", "assets/stars.jpg"], function() {
             // Crafty.enterScene("topDownTraversalScene");

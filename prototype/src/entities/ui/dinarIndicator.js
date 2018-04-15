@@ -8,6 +8,6 @@ Crafty.c("DinarIndicator", {
 
     updateDisplay: function() {
         var player = Crafty("Player");
-        this.text(player.dinars + " dinars")
+        this.text(dinars + " dinars")
     }
 })

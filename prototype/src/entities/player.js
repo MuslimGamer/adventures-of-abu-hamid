@@ -1,5 +1,8 @@
 const PADDING = 8;
 
+var inventory = [];
+var dinars = 0;
+
 Crafty.c("Player", {
     init: function() {
         this.requires("Actor")
@@ -8,8 +11,7 @@ Crafty.c("Player", {
             .controllable(config('playerSpeed'))
             .followWithCamera();
 
-        this.inventory = [];
-        this.dinars = config("startingDinars");
+        this.inventory = inventory;
         this.collideWith("Wall").collideWith("Merchant");
 
         this.onKeyPress(Crafty.keys.I, function() {

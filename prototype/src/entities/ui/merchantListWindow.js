@@ -40,7 +40,7 @@ Crafty.c('MerchantListWindow', {
             var item = this.items[itemIndex];
             var player = Crafty('Player');
 
-            if (player.dinars >= item.price) {
+            if (dinars >= item.price) {
 
                 var copy = Object.assign({}, item);
                 // If we already own it, increment our quantity by 1
@@ -51,7 +51,7 @@ Crafty.c('MerchantListWindow', {
                 } else {
                     existing[0].quantity += 1;
                 }
-                player.dinars -= item.price;
+                dinars -= item.price;
                 console.log("Bought one of " + item.name);
                 
                 // Decrement quantity by one from seller. If zero, remove.
@@ -84,7 +84,7 @@ Crafty.c('MerchantListWindow', {
             } else {
                 existing[0].quantity += 1;
             }
-            player.dinars += item.price;
+            dinars += item.price;
             console.log("Sold one of " + item.name);
             
             // Decrement quantity by one from seller. If zero, remove.
