@@ -9,19 +9,25 @@ Crafty.c('Merchant', {
         var numGoods = config("numGoodsPerMerchant");
         // Random but biased towards the first item(s?) heavily. Oh well.
         // https://stackoverflow.com/questions/19269545/how-to-get-n-no-elements-randomly-from-an-array
+
+        var allItemNames = config('goods');
+        this.priceMap = {};
+        allItemNames.forEach(itemName => {
+            this.priceMap[itemName] = Math.round(randomBetween(config("minPrice"), config("maxPrice")));
+        });
+
         var itemNames = config("goods").sort(() => .5 - Math.random()).slice(0, numGoods);
         this.items = [];
         for (var i = 0; i < itemNames.length; i++) {
-            var randomPrice = randomBetween(config("minPrice"), config("maxPrice"));
             var randomQuantity = randomBetween(config("minQuantity"), config("maxQuantity"));
-            var item = new Item(itemNames[i], Math.round(randomPrice), randomQuantity);
+            var item = new Item(itemNames[i], randomQuantity);
             this.items.push(item);
         }
 
         if (config('features').merchantsHaveFavouriteItems) {
             var itemName = itemNames[Math.floor(Math.random()*itemNames.length)];
-            var price = randomBetween(config("minPrice"), config("maxPrice")) + config("maxPrice");
-            this.favouriteItem = {name: itemName, price: price};
+            this.priceMap[itemName] = randomBetween(config("minPrice"), config("maxPrice")) + config("maxPrice");
+            this.favouriteItem = {name: itemName};
         }
     },
 
@@ -35,7 +41,7 @@ Crafty.c('Merchant', {
                 merchantWindow.setFavouriteItem(this.favouriteItem);
             }
             
-            merchantWindow.setBuyingAndSellingItems(this.items, player.inventory);
+            merchantWindow.setBuyingAndSellingItems(this.items, player.inventory, this.priceMap);
         }
     }
 });
