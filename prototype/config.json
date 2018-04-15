@@ -15,7 +15,8 @@ externs = {
     "playerSpeed": 300,
 
     "features": {
-        "merchantsHaveFavouriteItems": true
+        "merchantsHaveFavouriteItems": true,
+        "allowHaggling": false // unfinished
     },
 
     "universeSizeInPlanets": 5

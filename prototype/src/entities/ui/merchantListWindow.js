@@ -24,8 +24,10 @@ Crafty.c('MerchantListWindow', {
 
         this.buySellToggle = Crafty.e("BuySellToggle");
         this.tradeItem = this.buySellToggle.isPlayerBuying ? this.buyItem : this.sellItem;
-
-        this.haggleButton = Crafty.e('HaggleButton');
+        
+        if (config('features').allowHaggling) {
+            this.haggleButton = Crafty.e('HaggleButton');
+        }
     },
 
     trade: function(e) {
@@ -105,7 +107,9 @@ Crafty.c('MerchantListWindow', {
 
     remove: function() {
         this.buySellToggle.die();
-        this.haggleButton.die();
+        if (config('features').allowHaggling) {
+            this.haggleButton.die();
+        }
     },
 
     setBuyingAndSellingItems: function(merchantItems, playerItems, priceMap) {
