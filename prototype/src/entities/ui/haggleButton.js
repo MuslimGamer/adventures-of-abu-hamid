@@ -7,7 +7,7 @@ Crafty.c('HaggleButton', {
             .size(150, 32)
             .move(this.parentWindow.x + 200, this.parentWindow.y + this.parentWindow.h)
             .onClick(function() {
-                console.log('Haggling!');
+                Crafty.e('HaggleWindow').setParentWindow(this.parentWindow);
             });
         
         this.text("Haggle");

@@ -16,7 +16,7 @@ externs = {
 
     "features": {
         "merchantsHaveFavouriteItems": true,
-        "allowHaggling": false // unfinished
+        "allowHaggling": true
     },
 
     "universeSizeInPlanets": 5
