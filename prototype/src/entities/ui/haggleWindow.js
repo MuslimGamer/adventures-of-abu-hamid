@@ -18,11 +18,16 @@ Crafty.c('HaggleWindow', {
             this.maxBarValue = price * 2;
 
             this.loadingBar = Crafty.e("Actor, ProgressBar")
-                .attr({ x: 150, y : 140, w: 100, h: 25, z: 100 })
+                .attr({w: 100, h: 25, z: 100 })
                 .centerOnScreen()
                 .progressBar(this.maxBarValue, false, "red", "green")
                 .updateBarProgress(price);
             
+            this.currentPrice = Crafty.e("Actor, Text2")
+                .size(0, 0)
+                .move(this.loadingBar.x + this.loadingBar.width() / 2, this.loadingBar.y + 50);
+
+            this.updatePrice();        
             this.bind("KeyUp", this.haggleOn);
             this.bind('EnterFrame', this.haggleBack);
         }
@@ -32,6 +37,7 @@ Crafty.c('HaggleWindow', {
         if (e.key == Crafty.keys.H) {
             var currentBarProgress = this.loadingBar._pbFilledFraction * this.maxBarValue;
             this.loadingBar.updateBarProgress(currentBarProgress + this.maxBarValue * 0.05);
+            this.updatePrice();
         }
     },
 
@@ -40,8 +46,14 @@ Crafty.c('HaggleWindow', {
         if (now - this.lastHaggleTime > 500) {
             var currentBarProgress = this.loadingBar._pbFilledFraction * this.maxBarValue;
             this.loadingBar.updateBarProgress(currentBarProgress - this.maxBarValue * 0.05);
+            this.updatePrice();
             this.lastHaggleTime = Date.now();
         }
+    },
+
+    updatePrice: function() {
+        var newPrice = Math.round(this.loadingBar._pbFilledFraction * this.maxBarValue);
+        this.currentPrice.text(newPrice.toString());
     },
 
     setParentWindow: function(parentWindow) {
