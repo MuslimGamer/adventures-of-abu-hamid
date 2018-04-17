@@ -10,13 +10,18 @@ Crafty.c('HaggleWindow', {
             this.haggle(selectedItemIndex);            
         });
         this.lastHaggleTime = 0;
+
+        this.onKeyPress(Crafty.keys.ESC, function() {
+            this.die();
+        });
     },
 
     haggle: function(itemIndex) {
         if (!this.alreadyHaggling && itemIndex >= 0 && itemIndex < this.items.length) {
             this.alreadyHaggling = true;
-            var item = this.items[itemIndex];
-            this.originalPrice = this.priceMap[item.name];
+            this.itemIndex = itemIndex;
+            this.item = this.items[itemIndex];
+            this.originalPrice = this.priceMap[this.item.name];
             this.maxBarValue = this.originalPrice * 2;
 
             var flipBar, emptyColour, filledColour;
@@ -41,6 +46,7 @@ Crafty.c('HaggleWindow', {
             this.updatePrice();        
             this.bind("KeyUp", this.haggleOn);
             this.bind('EnterFrame', this.haggleBack);
+            this.haggleStartTime = Date.now();
         }
     },
 
@@ -56,7 +62,14 @@ Crafty.c('HaggleWindow', {
 
     haggleBack: function(frame, delta) {
         var now = Date.now();
-        if (now - this.lastHaggleTime > 500) {
+        if (now - this.haggleStartTime > 5000) {
+            var currentPrice = Math.round(this.loadingBar._pbFilledFraction * this.maxBarValue);
+            console.log("bought one " + this.item.name + " for " + currentPrice);
+            this.priceMap[this.item.name] = currentPrice;
+            this.parentWindow.tradeItem(this.itemIndex);
+            this.priceMap[this.item.name] = this.originalPrice;
+            this.die();
+        } else if (now - this.lastHaggleTime > 500) {
             var currentBarProgress = this.loadingBar._pbFilledFraction * this.maxBarValue;
             var haggleDirection = this.parentWindow.buySellToggle.isPlayerBuying ? 1 : -1;
             var haggleRate = this.getHaggleRate(haggleDirection);
@@ -85,5 +98,11 @@ Crafty.c('HaggleWindow', {
         this.priceMap = parentWindow.priceMap;
         this.favouriteItem = parentWindow.favouriteItem;
         this.updateDisplay();
+    },
+
+    die: function() {
+        this.loadingBar.destroy();
+        this.currentPrice.destroy();
+        this.destroy();
     }
 });
