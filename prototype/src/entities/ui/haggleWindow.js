@@ -47,6 +47,7 @@ Crafty.c('HaggleWindow', {
             this.bind("KeyUp", this.haggleOn);
             this.bind('EnterFrame', this.haggleBack);
             this.haggleStartTime = Date.now();
+            this.sessionHaggleSpeed = randomBetween(100, 200);  // in miliseconds
         }
     },
 
@@ -69,7 +70,7 @@ Crafty.c('HaggleWindow', {
             this.parentWindow.tradeItem(this.itemIndex);
             this.priceMap[this.item.name] = this.originalPrice;
             this.restoreParentWindow();
-        } else if (now - this.lastHaggleTime > 150) {
+        } else if (now - this.lastHaggleTime > this.sessionHaggleSpeed) {
             var currentBarProgress = this.loadingBar._pbFilledFraction * this.maxBarValue;
             var haggleDirection = this.parentWindow.buySellToggle.isPlayerBuying ? 1 : -1;
             var haggleRate = this.getHaggleRate(haggleDirection);
