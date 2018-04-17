@@ -1,4 +1,4 @@
-const BASE_HAGGLE_RATE = 0.05;
+const BASE_HAGGLE_RATE = 0.01;
 
 Crafty.c('HaggleWindow', {
     init: function () {
@@ -64,12 +64,12 @@ Crafty.c('HaggleWindow', {
         var now = Date.now();
         if (now - this.haggleStartTime > 5000) {
             var currentPrice = Math.round(this.loadingBar._pbFilledFraction * this.maxBarValue);
-            console.log("bought one " + this.item.name + " for " + currentPrice);
+            console.log("haggled one " + this.item.name + " for " + currentPrice);
             this.priceMap[this.item.name] = currentPrice;
             this.parentWindow.tradeItem(this.itemIndex);
             this.priceMap[this.item.name] = this.originalPrice;
             this.die();
-        } else if (now - this.lastHaggleTime > 500) {
+        } else if (now - this.lastHaggleTime > 150) {
             var currentBarProgress = this.loadingBar._pbFilledFraction * this.maxBarValue;
             var haggleDirection = this.parentWindow.buySellToggle.isPlayerBuying ? 1 : -1;
             var haggleRate = this.getHaggleRate(haggleDirection);
