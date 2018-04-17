@@ -12,7 +12,7 @@ Crafty.c('HaggleWindow', {
         this.lastHaggleTime = 0;
 
         this.onKeyPress(Crafty.keys.ESC, function() {
-            this.die();
+            this.restoreParentWindow();
         });
     },
 
@@ -68,7 +68,7 @@ Crafty.c('HaggleWindow', {
             this.priceMap[this.item.name] = currentPrice;
             this.parentWindow.tradeItem(this.itemIndex);
             this.priceMap[this.item.name] = this.originalPrice;
-            this.die();
+            this.restoreParentWindow();
         } else if (now - this.lastHaggleTime > 150) {
             var currentBarProgress = this.loadingBar._pbFilledFraction * this.maxBarValue;
             var haggleDirection = this.parentWindow.buySellToggle.isPlayerBuying ? 1 : -1;
@@ -100,9 +100,16 @@ Crafty.c('HaggleWindow', {
         this.updateDisplay();
     },
 
-    die: function() {
-        this.loadingBar.destroy();
-        this.currentPrice.destroy();
+    restoreParentWindow: function() {
+        delete this.loadingBar.destroy();
+        delete this.currentPrice.destroy();
         this.destroy();
+        var newParentWindow = this.parentWindow.clone();
+        newParentWindow.merchantItems = this.parentWindow.merchantItems;
+        newParentWindow.playerInventory = this.parentWindow.playerInventory;
+        newParentWindow.priceMap = this.parentWindow.priceMap;
+        newParentWindow.favouriteItem = this.parentWindow.favouriteItem;
+        newParentWindow.items = this.parentWindow.items;
+        newParentWindow.buySellToggle.isPlayerBuying = this.parentWindow.buySellToggle.isPlayerBuying;
     }
 });
